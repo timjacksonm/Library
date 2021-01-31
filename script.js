@@ -37,14 +37,49 @@ function bookLoopToScreen() {
       let createReadQ = createBox.appendChild(document.createElement('li'));
       createReadQ.textContent = myLibrary[i].read;
 
+      let createSwitch = createBox.appendChild(document.createElement('label'));
+      createSwitch.setAttribute('class', 'switch');
+      let createCheckbox = createSwitch.appendChild(document.createElement('input'));
+      createCheckbox.setAttribute('type', 'checkbox');
+      createCheckbox.setAttribute('id', ('input'+i));
+      createCheckbox.setAttribute('onclick', 'changeReadStatus(event)')
+
+    if (myLibrary[i].read == ' yes read') {
+          createCheckbox.checked = true;
+          createBox.style.backgroundColor = '#4381c1';
+      }else {
+        createCheckbox.checked = false;
+        createBox.style.backgroundColor = '#4e4b5c';
+      }
+      
+      let createSlider = createSwitch.appendChild(document.createElement('span'));
+      createSlider.setAttribute('class', 'slider');
+
       createBox;
       createDiv;
       createTitle;
       createAuthor;
       createPages;
       createReadQ;
+      createSwitch;
+      createCheckbox;
+      createSlider;
     }
 };
+function changeReadStatus(event) {
+    let selectElementParent = document.getElementById(event.target.id).parentElement.parentElement;
+    let num = selectElementParent.children[0].id;
+
+    if (document.getElementById(event.target.id).checked) {
+        selectElementParent.style.backgroundColor = '#4381c1';
+        selectElementParent.children[4].textContent = ' yes read';
+        myLibrary[num].read = " yes read";
+    } else {
+        selectElementParent.style.backgroundColor = '#4e4B5c';
+        selectElementParent.children[4].textContent = ' not read yet';
+        myLibrary[num].read = " not read yet";
+    } 
+}
 function removeBook(event) {
     let result = confirm('Are you sure you want to delete this book?');
     
@@ -54,7 +89,7 @@ function removeBook(event) {
     myLibrary.splice(num, 1);
     bookLoopToScreen();
     }else {
-        
+
     }
 };
 function openForm() {
