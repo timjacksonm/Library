@@ -82,43 +82,41 @@ function changeReadStatus(event) {
 }
 function removeGame(event) {
     let result = confirm('Are you sure you want to delete this game?');
-    
-    if(result == true){
     let num = event.target.id;
+
+    if(result == true){
     document.getElementById(num).parentElement.remove();
     myLibrary.splice(num, 1);
     gameLoopToScreen();
-    }else {
-
     }
 };
 function openForm() {
     const selectBody = document.querySelector('body');
-    const createDivContainer = document.createElement('form');
-    createDivContainer.setAttribute('id', 'formContainer');
-    selectBody.appendChild(createDivContainer)
+    const createFormContainer = document.createElement('form');
+    createFormContainer.setAttribute('id', 'formContainer');
+    selectBody.appendChild(createFormContainer)
 
-    const selectDivContainer = document.querySelector('#formContainer');
+    const SelectFormContainer = document.querySelector('#formContainer');
 
-    let createDiv = selectDivContainer.appendChild(document.createElement('button'));
+    let createDiv = SelectFormContainer.appendChild(document.createElement('button'));
     createDiv.setAttribute('class', 'deleteButton');
     createDiv.setAttribute('onclick', 'removeForm()');
-    createDiv.textContent = 'x'
+    createDiv.textContent = 'x';
 
     
-    const QOne = selectDivContainer.appendChild(document.createElement('div'));
+    const QOne = SelectFormContainer.appendChild(document.createElement('div'));
     QOne.textContent = 'What is the games title?';
     
-    const QOneInput = selectDivContainer.appendChild(document.createElement('input'));
+    const QOneInput = SelectFormContainer.appendChild(document.createElement('input'));
     QOneInput.setAttribute('class', 'inputStyle');
     QOneInput.setAttribute('name', 'input1');
     QOneInput.setAttribute('id', 'input1');
     QOneInput.setAttribute('autocomplete', 'off');
 
-    const QTwo = selectDivContainer.appendChild(document.createElement('div'));
+    const QTwo = SelectFormContainer.appendChild(document.createElement('div'));
     QTwo.textContent = 'Adding under what platform?';
     
-    const QTwoInput = selectDivContainer.appendChild(document.createElement('label'));
+    const QTwoInput = SelectFormContainer.appendChild(document.createElement('label'));
     QTwoInput.setAttribute('class', 'inputStyle');
     QTwoInput.setAttribute('name', 'input2');
     QTwoInput.setAttribute('id', 'input2');
@@ -143,10 +141,10 @@ function openForm() {
     }
     QTwoInputSelection();
     
-    const QThree = selectDivContainer.appendChild(document.createElement('div'));
+    const QThree = SelectFormContainer.appendChild(document.createElement('div'));
     QThree.textContent = 'Do you own this game?';
     
-    QThreeInput = selectDivContainer.appendChild(document.createElement('label'));
+    QThreeInput = SelectFormContainer.appendChild(document.createElement('label'));
     QThreeInput.setAttribute('class', 'inputStyle');
     QThreeInput.setAttribute('name', 'input3');
     QThreeInput.setAttribute('id', 'input3');
@@ -168,10 +166,10 @@ function openForm() {
     }
     QThreeInputSelection();
     
-    const QFour = selectDivContainer.appendChild(document.createElement('div'));
+    const QFour = SelectFormContainer.appendChild(document.createElement('div'));
     QFour.textContent = 'Have you completed the game?';
    
-    const QFourInput = selectDivContainer.appendChild(document.createElement('label'));
+    const QFourInput = SelectFormContainer.appendChild(document.createElement('label'));
     QFourInput.setAttribute('class', 'inputStyle');
     QFourInput.setAttribute('name', 'input4');
     QFourInput.setAttribute('id', 'input4');
@@ -193,7 +191,7 @@ function openForm() {
     }
     QFourInputSelection();
     
-    const submitButton = selectDivContainer.appendChild(document.createElement('input'));
+    const submitButton = SelectFormContainer.appendChild(document.createElement('input'));
     submitButton.setAttribute('class', 'inputStyle');
     submitButton.setAttribute('type', 'submit');
     submitButton.setAttribute('value', 'Submit');
@@ -220,9 +218,19 @@ function openForm() {
 function removeForm() {
     const selectBody = document.querySelector('body');
     selectBody.children[4].remove();
+    disableToggleAddAGame();
 };
+function disableToggleAddAGame() {
+    const addAGame = document.querySelector('.button');
+
+    if (addAGame.disabled) {
+        addAGame.disabled = false;  
+    }else {
+    addAGame.disabled = true;
+    }
+}
 const addAGame = document.querySelector('.button');
-addAGame.addEventListener('click', () => { openForm();})
+addAGame.addEventListener('click', () => { openForm(), disableToggleAddAGame()})
 addGameToLibrary(new game('Halo 2', ' Xbox', ' Owned: Yes', ' yes completed'));
 addGameToLibrary(new game('BloodBourne', ' Playstation 4', ' Owned: Yes', ' yes completed'));
 addGameToLibrary(new game('God Of War', ' Playstation 4', ' Owned: Yes', ' yes completed'));
