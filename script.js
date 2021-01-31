@@ -101,6 +101,7 @@ function openForm() {
     let createDiv = SelectFormContainer.appendChild(document.createElement('button'));
     createDiv.setAttribute('class', 'deleteButton');
     createDiv.setAttribute('onclick', 'removeForm()');
+    createDiv.setAttribute('type', 'reset');
     createDiv.textContent = 'x';
 
     
@@ -217,7 +218,7 @@ function openForm() {
 };
 function removeForm() {
     const selectBody = document.querySelector('body');
-    selectBody.children[4].remove();
+    selectBody.children[3].remove();
     disableToggleAddAGame();
 };
 function disableToggleAddAGame() {
