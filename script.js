@@ -1,17 +1,17 @@
 let myLibrary = [];
-function book(title, author, pages, read) {
+function game(title, platform, owned, completed) {
     this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.read = read,
+    this.platform = platform,
+    this.owned = owned,
+    this.completed = completed,
     this.info = function() {
-       return (this.title + this.author + this.pages + this.read);
+       return (this.title + this.platform + this.owned + this.completed);
     }
 };
-function addBookToLibrary(book) {
-    myLibrary.push(book);
+function addGameToLibrary(game) {
+    myLibrary.push(game);
 };
-function bookLoopToScreen() {
+function gameLoopToScreen() {
     const container = document.querySelector('#container');
 
     while(container.hasChildNodes()) {
@@ -23,19 +23,19 @@ function bookLoopToScreen() {
       createBox.setAttribute('id', 'child');
 
       let createDiv = createBox.appendChild(document.createElement('button'));
-      createDiv.setAttribute('class', 'deleteBook');
+      createDiv.setAttribute('class', 'deleteButton');
       createDiv.setAttribute('id', i);
-      createDiv.setAttribute('onclick', 'removeBook(event)');
+      createDiv.setAttribute('onclick', 'removeGame(event)');
       createDiv.textContent = 'x'
       let createTitle = createBox.appendChild(document.createElement('li'));
       createTitle.textContent = myLibrary[i].title;
-      createTitle.setAttribute('class', 'bookTitle');
-      let createAuthor = createBox.appendChild(document.createElement('li'));
-      createAuthor.textContent = myLibrary[i].author;
-      let createPages = createBox.appendChild(document.createElement('li'));
-      createPages.textContent = myLibrary[i].pages;
-      let createReadQ = createBox.appendChild(document.createElement('li'));
-      createReadQ.textContent = myLibrary[i].read;
+      createTitle.setAttribute('class', 'gameTitle');
+      let createPlatform = createBox.appendChild(document.createElement('li'));
+      createPlatform.textContent = myLibrary[i].platform;
+      let createOwned = createBox.appendChild(document.createElement('li'));
+      createOwned.textContent = myLibrary[i].owned;
+      let createCompleted = createBox.appendChild(document.createElement('li'));
+      createCompleted.textContent = myLibrary[i].completed;
 
       let createSwitch = createBox.appendChild(document.createElement('label'));
       createSwitch.setAttribute('class', 'switch');
@@ -44,7 +44,7 @@ function bookLoopToScreen() {
       createCheckbox.setAttribute('id', ('input'+i));
       createCheckbox.setAttribute('onclick', 'changeReadStatus(event)')
 
-    if (myLibrary[i].read == ' yes read') {
+    if (myLibrary[i].completed == ' yes completed') {
           createCheckbox.checked = true;
           createBox.style.backgroundColor = '#4381c1';
       }else {
@@ -58,9 +58,9 @@ function bookLoopToScreen() {
       createBox;
       createDiv;
       createTitle;
-      createAuthor;
-      createPages;
-      createReadQ;
+      createPlatform;
+      createOwned;
+      createCompleted;
       createSwitch;
       createCheckbox;
       createSlider;
@@ -72,22 +72,22 @@ function changeReadStatus(event) {
 
     if (document.getElementById(event.target.id).checked) {
         selectElementParent.style.backgroundColor = '#4381c1';
-        selectElementParent.children[4].textContent = ' yes read';
-        myLibrary[num].read = " yes read";
+        selectElementParent.children[4].textContent = ' yes completed';
+        myLibrary[num].owned = " yes completed";
     } else {
         selectElementParent.style.backgroundColor = '#4e4B5c';
-        selectElementParent.children[4].textContent = ' not read yet';
-        myLibrary[num].read = " not read yet";
+        selectElementParent.children[4].textContent = ' not completed';
+        myLibrary[num].owned = " not completed";
     } 
 }
-function removeBook(event) {
-    let result = confirm('Are you sure you want to delete this book?');
+function removeGame(event) {
+    let result = confirm('Are you sure you want to delete this game?');
     
     if(result == true){
     let num = event.target.id;
     document.getElementById(num).parentElement.remove();
     myLibrary.splice(num, 1);
-    bookLoopToScreen();
+    gameLoopToScreen();
     }else {
 
     }
@@ -99,8 +99,15 @@ function openForm() {
     selectBody.appendChild(createDivContainer)
 
     const selectDivContainer = document.querySelector('#formContainer');
+
+    let createDiv = selectDivContainer.appendChild(document.createElement('button'));
+    createDiv.setAttribute('class', 'deleteButton');
+    createDiv.setAttribute('onclick', 'removeForm()');
+    createDiv.textContent = 'x'
+
+    
     const QOne = selectDivContainer.appendChild(document.createElement('div'));
-    QOne.textContent = 'What is the books name?';
+    QOne.textContent = 'What is the games title?';
     
     const QOneInput = selectDivContainer.appendChild(document.createElement('input'));
     QOneInput.setAttribute('class', 'inputStyle');
@@ -109,7 +116,7 @@ function openForm() {
     QOneInput.setAttribute('autocomplete', 'off');
 
     const QTwo = selectDivContainer.appendChild(document.createElement('div'));
-    QTwo.textContent = 'Who is the author of the book?';
+    QTwo.textContent = 'Adding under what platform?';
     
     const QTwoInput = selectDivContainer.appendChild(document.createElement('input'));
     QTwoInput.setAttribute('class', 'inputStyle');
@@ -118,7 +125,7 @@ function openForm() {
     QTwoInput.setAttribute('autocomplete', 'off');
     
     const QThree = selectDivContainer.appendChild(document.createElement('div'));
-    QThree.textContent = 'How many pages does the book have?';
+    QThree.textContent = 'Do you own this game?';
     
     QThreeInput = selectDivContainer.appendChild(document.createElement('input'));
     QThreeInput.setAttribute('class', 'inputStyle');
@@ -127,7 +134,7 @@ function openForm() {
     QThreeInput.setAttribute('autocomplete', 'off');
     
     const QFour = selectDivContainer.appendChild(document.createElement('div'));
-    QFour.textContent = 'Have you read the book yet? yes/no';
+    QFour.textContent = 'Have you completed the game?';
    
     const QFourInput = selectDivContainer.appendChild(document.createElement('input'));
     QFourInput.setAttribute('class', 'inputStyle');
@@ -152,23 +159,22 @@ function openForm() {
     
     let form = document.getElementById('formContainer');
     form.addEventListener('submit', (event) => {
-    addBookToLibrary(new book(`${form.input1.value}`, ` ${form.input2.value}`, ` ${form.input3.value}`, ` ${form.input4.value}`));
+    addGameToLibrary(new game(`${form.input1.value}`, ` ${form.input2.value}`, ` ${form.input3.value}`, ` ${form.input4.value}`));
     event.preventDefault();
-    bookLoopToScreen();
+    gameLoopToScreen();
     removeForm();
         }
     )
 };
 function removeForm() {
     const selectBody = document.querySelector('body');
-    const selectDivContainer = document.querySelector('#formContainer');
-    selectBody.removeChild(selectDivContainer);
+    selectBody.children[4].remove();
 };
-const addABook = document.querySelector('.button');
-addABook.addEventListener('click', () => { openForm();})
-addBookToLibrary(new book('The Hobbit', ' J.R.R. Tolkien', ' 295 pages', ' not read yet'));
-addBookToLibrary(new book('The Da Vinci Code', ' Dan Brown', ' 689 pages', ' not read yet'));
-addBookToLibrary(new book('Charlotte\s Web', ' Garth Williams', ' 192 pages', ' not read yet'));
-addBookToLibrary(new book('To Kill A Mockingbird', ' Harper Lee', ' 281 pages', ' not read yet'));
-addBookToLibrary(new book('Hatchet', ' by Gary Paulsen', ' 195 pages', ' yes read'));
-bookLoopToScreen();
+const addAGame = document.querySelector('.button');
+addAGame.addEventListener('click', () => { openForm();})
+addGameToLibrary(new game('Halo 2', ' Xbox', ' Owned: Yes', ' yes completed'));
+addGameToLibrary(new game('BloodBourne', ' Playstation 4', ' Owned: Yes', ' yes completed'));
+addGameToLibrary(new game('God Of War', ' Playstation 4', ' Owned: Yes', ' yes completed'));
+addGameToLibrary(new game('Ghost Of Tsushima', ' Playstation 4', ' Owned: Yes', ' not completed'));
+addGameToLibrary(new game('Crash Team Racing', ' Nintendo Switch', ' Owned: Yes', ' yes completed'));
+gameLoopToScreen();

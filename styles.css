@@ -82,7 +82,7 @@ li {
   padding: 12px 15px;
   margin: 8px 0;
 }
-.deleteBook {
+.deleteButton {
   width: 20px;
   height: 20px;
   align-self: flex-end;
@@ -94,7 +94,7 @@ li {
   font-size: 2vh;
   cursor: pointer;
 }
-.bookTitle {
+.gameitle {
   padding: 15px 0px 0px 0px;
 }
 /* The switch - the box around the slider */
