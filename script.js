@@ -218,7 +218,7 @@ function openForm() {
 };
 function removeForm() {
     const selectBody = document.querySelector('body');
-    selectBody.children[3].remove();
+    selectBody.lastChild.remove();
     disableToggleAddAGame();
 };
 function disableToggleAddAGame() {
