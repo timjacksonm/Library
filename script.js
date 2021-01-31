@@ -21,9 +21,15 @@ function bookLoopToScreen() {
     for(let i = 0 ; i < myLibrary.length; ++i) {
       let createBox = container.appendChild(document.createElement('ul'));
       createBox.setAttribute('id', 'child');
-    
+
+      let createDiv = createBox.appendChild(document.createElement('button'));
+      createDiv.setAttribute('class', 'deleteBook');
+      createDiv.setAttribute('id', i);
+      createDiv.setAttribute('onclick', 'removeBook(event)');
+      createDiv.textContent = 'x'
       let createTitle = createBox.appendChild(document.createElement('li'));
       createTitle.textContent = myLibrary[i].title;
+      createTitle.setAttribute('class', 'bookTitle');
       let createAuthor = createBox.appendChild(document.createElement('li'));
       createAuthor.textContent = myLibrary[i].author;
       let createPages = createBox.appendChild(document.createElement('li'));
@@ -32,56 +38,83 @@ function bookLoopToScreen() {
       createReadQ.textContent = myLibrary[i].read;
 
       createBox;
+      createDiv;
       createTitle;
       createAuthor;
       createPages;
       createReadQ;
     }
 };
+function removeBook(event) {
+    let result = confirm('Are you sure you want to delete this book?');
+    
+    if(result == true){
+    let num = event.target.id;
+    document.getElementById(num).parentElement.remove();
+    myLibrary.splice(num, 1);
+    bookLoopToScreen();
+    }else {
+        
+    }
+};
 function openForm() {
     const selectBody = document.querySelector('body');
     const createDivContainer = document.createElement('form');
     createDivContainer.setAttribute('id', 'formContainer');
-    
     selectBody.appendChild(createDivContainer)
+
     const selectDivContainer = document.querySelector('#formContainer');
-    let QOne = selectDivContainer.appendChild(document.createElement('div'));
+    const QOne = selectDivContainer.appendChild(document.createElement('div'));
     QOne.textContent = 'What is the books name?';
-    QOne;
-    let QOneInput = selectDivContainer.appendChild(document.createElement('input'));
+    
+    const QOneInput = selectDivContainer.appendChild(document.createElement('input'));
     QOneInput.setAttribute('class', 'inputStyle');
     QOneInput.setAttribute('name', 'input1');
     QOneInput.setAttribute('id', 'input1');
-    QOneInput;
-    let QTwo = selectDivContainer.appendChild(document.createElement('div'));
+    QOneInput.setAttribute('autocomplete', 'off');
+
+    const QTwo = selectDivContainer.appendChild(document.createElement('div'));
     QTwo.textContent = 'Who is the author of the book?';
-    QTwo;
-    let QTwoInput = selectDivContainer.appendChild(document.createElement('input'));
+    
+    const QTwoInput = selectDivContainer.appendChild(document.createElement('input'));
     QTwoInput.setAttribute('class', 'inputStyle');
     QTwoInput.setAttribute('name', 'input2');
     QTwoInput.setAttribute('id', 'input2');
-    QTwoInput;
-    let QThree = selectDivContainer.appendChild(document.createElement('div'));
+    QTwoInput.setAttribute('autocomplete', 'off');
+    
+    const QThree = selectDivContainer.appendChild(document.createElement('div'));
     QThree.textContent = 'How many pages does the book have?';
-    QThree;
+    
     QThreeInput = selectDivContainer.appendChild(document.createElement('input'));
     QThreeInput.setAttribute('class', 'inputStyle');
     QThreeInput.setAttribute('name', 'input3');
     QThreeInput.setAttribute('id', 'input3');
-    QThreeInput;
-    let QFour = selectDivContainer.appendChild(document.createElement('div'));
+    QThreeInput.setAttribute('autocomplete', 'off');
+    
+    const QFour = selectDivContainer.appendChild(document.createElement('div'));
     QFour.textContent = 'Have you read the book yet? yes/no';
-    QFour;
-    let QFourInput = selectDivContainer.appendChild(document.createElement('input'));
+   
+    const QFourInput = selectDivContainer.appendChild(document.createElement('input'));
     QFourInput.setAttribute('class', 'inputStyle');
     QFourInput.setAttribute('name', 'input4');
     QFourInput.setAttribute('id', 'input4');
-    QFourInput;
-    let submitButton = selectDivContainer.appendChild(document.createElement('input'));
+    QFourInput.setAttribute('autocomplete', 'off');
+    
+    const submitButton = selectDivContainer.appendChild(document.createElement('input'));
     submitButton.setAttribute('class', 'inputStyle');
     submitButton.setAttribute('type', 'submit');
     submitButton.setAttribute('value', 'Submit');
+
+    QOne;
+    QOneInput;
+    QTwo;
+    QTwoInput;
+    QThree;
+    QThreeInput;
+    QFour;
+    QFourInput;
     submitButton;
+    
     let form = document.getElementById('formContainer');
     form.addEventListener('submit', (event) => {
     addBookToLibrary(new book(`${form.input1.value}`, ` ${form.input2.value}`, ` ${form.input3.value}`, ` ${form.input4.value}`));

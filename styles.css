@@ -64,10 +64,6 @@ li {
   border: #181f1c;
   border-style: solid;
 }
-input {
-  width: 20%;
-  height: 5%;
-}
 #formContainer {
   position: fixed;
   top: 30%;
@@ -79,10 +75,25 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 5px 5px 5px 15px;
+  padding: 5px 15px 5px 15px;
 }
 .inputStyle {
-  width: 70%;
-  padding: 12px 20px;
+  width: 85%;
+  align-self: center;
+  padding: 12px 15px;
   margin: 8px 0;
+}
+.deleteBook {
+  width: 20px;
+  height: 20px;
+  align-self: flex-end;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  color: red;
+  font-size: 2vh;
+}
+.bookTitle {
+  padding: 15px 0px 0px 0px;
 }
