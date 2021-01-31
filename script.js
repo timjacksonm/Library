@@ -118,29 +118,80 @@ function openForm() {
     const QTwo = selectDivContainer.appendChild(document.createElement('div'));
     QTwo.textContent = 'Adding under what platform?';
     
-    const QTwoInput = selectDivContainer.appendChild(document.createElement('input'));
+    const QTwoInput = selectDivContainer.appendChild(document.createElement('label'));
     QTwoInput.setAttribute('class', 'inputStyle');
     QTwoInput.setAttribute('name', 'input2');
     QTwoInput.setAttribute('id', 'input2');
+    QTwoInput.setAttribute('for', 'platform1');
     QTwoInput.setAttribute('autocomplete', 'off');
+
+    function QTwoInputSelection() {
+    const selectionContainer = QTwoInput.appendChild(document.createElement('select'))
+    selectionContainer.setAttribute('name', 'platform1');
+    selectionContainer.setAttribute('class', 'inputStyle');
+    selectionContainer;
+    let optionOne = selectionContainer.appendChild(document.createElement('option'))
+    optionOne.textContent = "Xbox"
+    let optionTwo = selectionContainer.appendChild(document.createElement('option'))
+    optionTwo.textContent = "Playstation 4"
+    let optionThree = selectionContainer.appendChild(document.createElement('option'))
+    optionThree.textContent = "Nintendo Switch"
+
+    optionOne;
+    optionTwo;
+    optionThree;
+    }
+    QTwoInputSelection();
     
     const QThree = selectDivContainer.appendChild(document.createElement('div'));
     QThree.textContent = 'Do you own this game?';
     
-    QThreeInput = selectDivContainer.appendChild(document.createElement('input'));
+    QThreeInput = selectDivContainer.appendChild(document.createElement('label'));
     QThreeInput.setAttribute('class', 'inputStyle');
     QThreeInput.setAttribute('name', 'input3');
     QThreeInput.setAttribute('id', 'input3');
+    QTwoInput.setAttribute('for', 'platform2');
     QThreeInput.setAttribute('autocomplete', 'off');
+
+    function QThreeInputSelection() {
+        const selectionContainer = QThreeInput.appendChild(document.createElement('select'))
+        selectionContainer.setAttribute('name', 'platform2');
+        selectionContainer.setAttribute('class', 'inputStyle');
+        selectionContainer;
+        let optionOne = selectionContainer.appendChild(document.createElement('option'))
+        optionOne.textContent = "Owned: Yes"
+        let optionTwo = selectionContainer.appendChild(document.createElement('option'))
+        optionTwo.textContent = "Owned: No"
+
+        optionOne;
+        optionTwo;
+    }
+    QThreeInputSelection();
     
     const QFour = selectDivContainer.appendChild(document.createElement('div'));
     QFour.textContent = 'Have you completed the game?';
    
-    const QFourInput = selectDivContainer.appendChild(document.createElement('input'));
+    const QFourInput = selectDivContainer.appendChild(document.createElement('label'));
     QFourInput.setAttribute('class', 'inputStyle');
     QFourInput.setAttribute('name', 'input4');
     QFourInput.setAttribute('id', 'input4');
+    QTwoInput.setAttribute('for', 'platform3');
     QFourInput.setAttribute('autocomplete', 'off');
+
+    function QFourInputSelection() {
+        const selectionContainer = QFourInput.appendChild(document.createElement('select'))
+        selectionContainer.setAttribute('name', 'platform3');
+        selectionContainer.setAttribute('class', 'inputStyle');
+        selectionContainer;
+        let optionOne = selectionContainer.appendChild(document.createElement('option'))
+        optionOne.textContent = "not completed"
+        let optionTwo = selectionContainer.appendChild(document.createElement('option'))
+        optionTwo.textContent = "yes completed"
+
+        optionOne;
+        optionTwo;
+    }
+    QFourInputSelection();
     
     const submitButton = selectDivContainer.appendChild(document.createElement('input'));
     submitButton.setAttribute('class', 'inputStyle');
@@ -159,7 +210,7 @@ function openForm() {
     
     let form = document.getElementById('formContainer');
     form.addEventListener('submit', (event) => {
-    addGameToLibrary(new game(`${form.input1.value}`, ` ${form.input2.value}`, ` ${form.input3.value}`, ` ${form.input4.value}`));
+    addGameToLibrary(new game(`${form.input1.value}`, ` ${form.platform1.value}`, ` ${form.platform2.value}`, ` ${form.platform3.value}`));
     event.preventDefault();
     gameLoopToScreen();
     removeForm();
