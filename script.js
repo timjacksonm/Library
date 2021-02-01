@@ -29,7 +29,7 @@ function gameLoopToScreen() {
       createDiv.textContent = 'x'
       let createTitle = createBox.appendChild(document.createElement('li'));
       createTitle.textContent = myLibrary[i].title;
-      createTitle.setAttribute('class', 'gameTitle');
+      createTitle.setAttribute('class', 'gameTitle, cardStyle');
       let createPlatform = createBox.appendChild(document.createElement('li'));
       createPlatform.textContent = myLibrary[i].platform;
       let createOwned = createBox.appendChild(document.createElement('li'));
@@ -46,10 +46,12 @@ function gameLoopToScreen() {
 
     if (myLibrary[i].completed == ' yes completed') {
           createCheckbox.checked = true;
-          createBox.style.backgroundColor = '#4381c1';
+          createBox.style.backgroundColor = '#a40000';
+          createBox.style.borderColor = '#ff0000';
       }else {
         createCheckbox.checked = false;
         createBox.style.backgroundColor = '#4e4b5c';
+        createBox.style.borderColor = '#000000';
       }
       
       let createSlider = createSwitch.appendChild(document.createElement('span'));
@@ -71,11 +73,13 @@ function changeReadStatus(event) {
     let num = selectElementParent.children[0].id;
 
     if (document.getElementById(event.target.id).checked) {
-        selectElementParent.style.backgroundColor = '#4381c1';
+        selectElementParent.style.backgroundColor = '#a40000';
+        selectElementParent.style.borderColor = '#ff0000'
         selectElementParent.children[4].textContent = ' yes completed';
         myLibrary[num].owned = " yes completed";
     } else {
         selectElementParent.style.backgroundColor = '#4e4B5c';
+        selectElementParent.style.borderColor = '#000000';
         selectElementParent.children[4].textContent = ' not completed';
         myLibrary[num].owned = " not completed";
     } 
@@ -232,6 +236,7 @@ function disableToggleAddAGame() {
 }
 const addAGame = document.querySelector('.button');
 addAGame.addEventListener('click', () => { openForm(), disableToggleAddAGame()})
+
 addGameToLibrary(new game('Halo 2', ' Xbox', ' Owned: Yes', ' yes completed'));
 addGameToLibrary(new game('BloodBourne', ' Playstation 4', ' Owned: Yes', ' yes completed'));
 addGameToLibrary(new game('God Of War', ' Playstation 4', ' Owned: Yes', ' yes completed'));
