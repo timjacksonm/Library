@@ -105,7 +105,7 @@ function removeGame(event) {
     if(result == true){
     document.getElementById(num).parentElement.remove();
     myLibrary.splice(num, 1);
-    gameLoopToScreen();
+    gameLoopToScreen(filteredGames);
     }
 };
 function openForm() {
