@@ -240,7 +240,7 @@ function openForm() {
     form.addEventListener('submit', (event) => {
     addGameToLibrary(new game(`${form.input1.value}`, ` ${form.platform1.value}`, ` ${form.platform2.value}`, ` ${form.platform3.value}`));
     event.preventDefault();
-    gameLoopToScreen();
+    gameLoopToScreen(filteredGames);
     removeForm();
         }
     )
