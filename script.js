@@ -1,3 +1,4 @@
+//global data storage
 let myLibrary = [];
 let filteredGames = myLibrary;
 let searchString = '';
@@ -15,77 +16,67 @@ function addGameToLibrary(game) {
 };
 function gameLoopToScreen(filteredGames) {
     const container = document.querySelector('#container');
-
+    //while loop checks to see if there are cards on the screen already. if so it deletes all of them.
     while(container.hasChildNodes()) {
         container.removeChild(container.lastChild);
     }
-
+    //for loop re creates cards based on filteredGames current list of games in memory.
     for(let i = 0 ; i < filteredGames.length; ++i) {
-      let createBox = container.appendChild(document.createElement('li'));
-      createBox.setAttribute('id', 'child');
-
-      let createDiv = createBox.appendChild(document.createElement('button'));
-      createDiv.setAttribute('class', 'deleteButton');
-      createDiv.setAttribute('id', i);
-      createDiv.setAttribute('onclick', 'removeGame(event)');
-      createDiv.textContent = 'x'
-      let createTitle = createBox.appendChild(document.createElement('li'));
-      createTitle.textContent = filteredGames[i].title;
-      createTitle.setAttribute('class', 'gameTitle, cardStyle');
-      let createPlatform = createBox.appendChild(document.createElement('li'));
-      createPlatform.textContent = filteredGames[i].platform;
-      let createOwned = createBox.appendChild(document.createElement('li'));
-      createOwned.textContent = filteredGames[i].owned;
-      let createCompleted = createBox.appendChild(document.createElement('li'));
-      createCompleted.textContent = filteredGames[i].completed;
-
-      let createSwitch = createBox.appendChild(document.createElement('label'));
-      createSwitch.setAttribute('class', 'switch');
-      let createCheckbox = createSwitch.appendChild(document.createElement('input'));
-      createCheckbox.setAttribute('type', 'checkbox');
-      createCheckbox.setAttribute('id', ('input'+i));
-      createCheckbox.setAttribute('onclick', 'changeCompletedStatus(event)')
-
-    if (filteredGames[i].completed == ' yes completed') {
-          createCheckbox.checked = true;
-          createBox.style.backgroundColor = '#a40000';
-          createBox.style.borderColor = '#ff0000';
-      }else {
-        createCheckbox.checked = false;
-        createBox.style.backgroundColor = '#4e4b5c';
-        createBox.style.borderColor = '#000000';
-      }
-      
-      let createSlider = createSwitch.appendChild(document.createElement('span'));
-      createSlider.setAttribute('class', 'slider');
-
-      createBox;
-      createDiv;
-      createTitle;
-      createPlatform;
-      createOwned;
-      createCompleted;
-      createSwitch;
-      createCheckbox;
-      createSlider;
+        //create card box
+        let createBox = container.appendChild(document.createElement('li'));
+        createBox.setAttribute('id', 'child');
+        //button inside cardbox that can delete the entire card from container.
+        let createDiv = createBox.appendChild(document.createElement('button'));
+        createDiv.setAttribute('class', 'deleteButton');
+        createDiv.setAttribute('id', i);
+        createDiv.setAttribute('onclick', 'removeGame(event)');
+        createDiv.textContent = 'x'
+        //title,platform,owned,completed read from memory and put on card.
+        let createTitle = createBox.appendChild(document.createElement('li'));
+        createTitle.textContent = filteredGames[i].title;
+        createTitle.setAttribute('class', 'gameTitle, cardStyle');
+        let createPlatform = createBox.appendChild(document.createElement('li'));
+        createPlatform.textContent = filteredGames[i].platform;
+        let createOwned = createBox.appendChild(document.createElement('li'));
+        createOwned.textContent = filteredGames[i].owned;
+        let createCompleted = createBox.appendChild(document.createElement('li'));
+        createCompleted.textContent = filteredGames[i].completed;
+        //Switch, Checkbox & Slider - creates slider button at the bottom of card.
+        let createSwitch = createBox.appendChild(document.createElement('label'));
+        createSwitch.setAttribute('class', 'switch');
+        let createCheckbox = createSwitch.appendChild(document.createElement('input'));
+        createCheckbox.setAttribute('type', 'checkbox');
+        createCheckbox.setAttribute('id', ('input'+i));
+        createCheckbox.setAttribute('onclick', 'changeCompletedStatus(event)')
+        let createSlider = createSwitch.appendChild(document.createElement('span'));
+        createSlider.setAttribute('class', 'slider');
+        //if statement - Slider checkmark and color of card are assigned correctly based on memory of card being created.
+        if (filteredGames[i].completed == ' yes completed') {
+              createCheckbox.checked = true;
+              createBox.style.backgroundColor = '#a40000';
+              createBox.style.borderColor = '#ff0000';
+          }else {
+            createCheckbox.checked = false;
+            createBox.style.backgroundColor = '#4e4b5c';
+            createBox.style.borderColor = '#000000';
+          }
+        //runs variables from above.
+        createBox;
+        createDiv;
+        createTitle;
+        createPlatform;
+        createOwned;
+        createCompleted;
+        createSwitch;
+        createCheckbox;
+        createSlider;
     }
 };
-const searchBar = document.getElementById('searchBar');
-
-searchBar.addEventListener('keyup', (e) => {
-    searchString = e.target.value.toLowerCase();
-    filteredGames = myLibrary.filter((myLibrary) => {
-        return (myLibrary.title.toLowerCase().includes(searchString) || 
-                myLibrary.platform.toLowerCase().includes(searchString) || 
-                myLibrary.owned.toLowerCase().includes(searchString) || 
-                myLibrary.completed.toLowerCase().includes(searchString)
-                )})
-                // console.log(filteredGames);
-    gameLoopToScreen(filteredGames);
-});
 function changeCompletedStatus(event) {
+    //This function is used with the slider button of each card.
     let selectElementParent = document.getElementById(event.target.id).parentElement.parentElement;
     let num = '';
+    //if statement assigns num to an intiger so we can reference the correct game in memory to change it below.
     if(searchString == '') {
         num = selectElementParent.children[0].id;
     }else {
@@ -96,7 +87,7 @@ function changeCompletedStatus(event) {
             }
         }
     }
-
+    //updates DOM & memory
     if (document.getElementById(event.target.id).checked) {
         selectElementParent.style.backgroundColor = '#a40000';
         selectElementParent.style.borderColor = '#ff0000'
@@ -112,7 +103,7 @@ function changeCompletedStatus(event) {
 function removeGame(event) {
     let result = confirm('Are you sure you want to delete this game?');
     let num = '';
-
+    //same method as changeCompletedStatus function. num intiger is determined so we can reference correct game in memory.
     if (result == true) {
         if(searchString == '') {
             num = event.target.id;
@@ -283,9 +274,21 @@ function disableToggleAddAGame() {
     addAGame.disabled = true;
     }
 }
+
 const addAGame = document.querySelector('.button');
 addAGame.addEventListener('click', () => { openForm(), disableToggleAddAGame()})
 
+const searchBar = document.getElementById('searchBar');
+searchBar.addEventListener('keyup', (e) => {
+    searchString = e.target.value.toLowerCase();
+    filteredGames = myLibrary.filter((myLibrary) => {
+        return (myLibrary.title.toLowerCase().includes(searchString) || 
+                myLibrary.platform.toLowerCase().includes(searchString) || 
+                myLibrary.owned.toLowerCase().includes(searchString) || 
+                myLibrary.completed.toLowerCase().includes(searchString)
+                )})
+    gameLoopToScreen(filteredGames);
+});
 addGameToLibrary(new game('Halo 2', ' Xbox', ' Owned: Yes', ' yes completed'));
 addGameToLibrary(new game('BloodBourne', ' Playstation 4', ' Owned: Yes', ' yes completed'));
 addGameToLibrary(new game('God Of War', ' Playstation 4', ' Owned: Yes', ' yes completed'));
