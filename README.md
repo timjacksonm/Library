@@ -9,6 +9,7 @@
 
 **Extra Credit**
 
+- [✔️] Add a Search bar that lets you search through the library.
 - [] Give user option to save their data they input either by local storage or in the cloud!
 - [] Add a day/night background setting to the page.
 - [] Add transition DOM effects
