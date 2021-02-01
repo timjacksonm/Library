@@ -114,12 +114,17 @@ function removeGame(event) {
     let num = '';
 
     if (result == true) {
-        for (let i = 0; i < myLibrary.length; i++) {
+        if(searchString == '') {
+            num = event.target.id;
+        }else {
+            for(let i = 0; i < myLibrary.length; i++) {
         if(myLibrary[i].title.toLowerCase().includes(searchString)) {
             num = i;
             break;
             }
         }
+    }
+
     document.getElementById(event.target.id).parentElement.remove();
     myLibrary.splice(num, 1);
     filteredGames.splice(event.target.id, 1);
@@ -257,6 +262,7 @@ function openForm() {
     let form = document.getElementById('formContainer');
     form.addEventListener('submit', (event) => {
     addGameToLibrary(new game(`${form.input1.value}`, ` ${form.platform1.value}`, ` ${form.platform2.value}`, ` ${form.platform3.value}`));
+    filteredGames = myLibrary;
     event.preventDefault();
     gameLoopToScreen(filteredGames);
     removeForm();
