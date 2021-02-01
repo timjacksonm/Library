@@ -1,5 +1,6 @@
 let myLibrary = [];
 let filteredGames = myLibrary;
+let searchString = '';
 function game(title, platform, owned, completed) {
     this.title = title,
     this.platform = platform,
@@ -43,7 +44,7 @@ function gameLoopToScreen(filteredGames) {
       let createCheckbox = createSwitch.appendChild(document.createElement('input'));
       createCheckbox.setAttribute('type', 'checkbox');
       createCheckbox.setAttribute('id', ('input'+i));
-      createCheckbox.setAttribute('onclick', 'changeReadStatus(event)')
+      createCheckbox.setAttribute('onclick', 'changeCompletedStatus(event)')
 
     if (filteredGames[i].completed == ' yes completed') {
           createCheckbox.checked = true;
@@ -72,7 +73,7 @@ function gameLoopToScreen(filteredGames) {
 const searchBar = document.getElementById('searchBar');
 
 searchBar.addEventListener('keyup', (e) => {
-    const searchString = e.target.value.toLowerCase();
+    searchString = e.target.value.toLowerCase();
     filteredGames = myLibrary.filter((myLibrary) => {
         return (myLibrary.title.toLowerCase().includes(searchString) || 
                 myLibrary.platform.toLowerCase().includes(searchString) || 
@@ -82,29 +83,46 @@ searchBar.addEventListener('keyup', (e) => {
                 // console.log(filteredGames);
     gameLoopToScreen(filteredGames);
 });
-function changeReadStatus(event) {
+function changeCompletedStatus(event) {
     let selectElementParent = document.getElementById(event.target.id).parentElement.parentElement;
-    let num = selectElementParent.children[0].id;
+    let num = '';
+    if(searchString == '') {
+        num = selectElementParent.children[0].id;
+    }else {
+     for (let i = 0; i < myLibrary.length; i++) {
+        if(myLibrary[i].title.toLowerCase().includes(searchString)) {
+            num = i;
+            break;
+            }
+        }
+    }
 
     if (document.getElementById(event.target.id).checked) {
         selectElementParent.style.backgroundColor = '#a40000';
         selectElementParent.style.borderColor = '#ff0000'
         selectElementParent.children[4].textContent = ' yes completed';
-        myLibrary[num].owned = " yes completed";
+        myLibrary[num].completed = " yes completed";
     } else {
         selectElementParent.style.backgroundColor = '#4e4B5c';
         selectElementParent.style.borderColor = '#000000';
         selectElementParent.children[4].textContent = ' not completed';
-        myLibrary[num].owned = " not completed";
+        myLibrary[num].completed = " not completed";
     } 
 }
 function removeGame(event) {
     let result = confirm('Are you sure you want to delete this game?');
-    let num = event.target.id;
+    let num = '';
 
-    if(result == true){
-    document.getElementById(num).parentElement.remove();
+    if (result == true) {
+        for (let i = 0; i < myLibrary.length; i++) {
+        if(myLibrary[i].title.toLowerCase().includes(searchString)) {
+            num = i;
+            break;
+            }
+        }
+    document.getElementById(event.target.id).parentElement.remove();
     myLibrary.splice(num, 1);
+    filteredGames.splice(event.target.id, 1);
     gameLoopToScreen(filteredGames);
     }
 };
