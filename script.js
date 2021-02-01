@@ -1,4 +1,5 @@
 let myLibrary = [];
+let filteredGames = myLibrary;
 function game(title, platform, owned, completed) {
     this.title = title,
     this.platform = platform,
@@ -11,15 +12,15 @@ function game(title, platform, owned, completed) {
 function addGameToLibrary(game) {
     myLibrary.push(game);
 };
-function gameLoopToScreen() {
+function gameLoopToScreen(filteredGames) {
     const container = document.querySelector('#container');
 
     while(container.hasChildNodes()) {
         container.removeChild(container.lastChild);
     }
 
-    for(let i = 0 ; i < myLibrary.length; ++i) {
-      let createBox = container.appendChild(document.createElement('ul'));
+    for(let i = 0 ; i < filteredGames.length; ++i) {
+      let createBox = container.appendChild(document.createElement('li'));
       createBox.setAttribute('id', 'child');
 
       let createDiv = createBox.appendChild(document.createElement('button'));
@@ -28,14 +29,14 @@ function gameLoopToScreen() {
       createDiv.setAttribute('onclick', 'removeGame(event)');
       createDiv.textContent = 'x'
       let createTitle = createBox.appendChild(document.createElement('li'));
-      createTitle.textContent = myLibrary[i].title;
+      createTitle.textContent = filteredGames[i].title;
       createTitle.setAttribute('class', 'gameTitle, cardStyle');
       let createPlatform = createBox.appendChild(document.createElement('li'));
-      createPlatform.textContent = myLibrary[i].platform;
+      createPlatform.textContent = filteredGames[i].platform;
       let createOwned = createBox.appendChild(document.createElement('li'));
-      createOwned.textContent = myLibrary[i].owned;
+      createOwned.textContent = filteredGames[i].owned;
       let createCompleted = createBox.appendChild(document.createElement('li'));
-      createCompleted.textContent = myLibrary[i].completed;
+      createCompleted.textContent = filteredGames[i].completed;
 
       let createSwitch = createBox.appendChild(document.createElement('label'));
       createSwitch.setAttribute('class', 'switch');
@@ -44,7 +45,7 @@ function gameLoopToScreen() {
       createCheckbox.setAttribute('id', ('input'+i));
       createCheckbox.setAttribute('onclick', 'changeReadStatus(event)')
 
-    if (myLibrary[i].completed == ' yes completed') {
+    if (filteredGames[i].completed == ' yes completed') {
           createCheckbox.checked = true;
           createBox.style.backgroundColor = '#a40000';
           createBox.style.borderColor = '#ff0000';
@@ -68,6 +69,19 @@ function gameLoopToScreen() {
       createSlider;
     }
 };
+const searchBar = document.getElementById('searchBar');
+
+searchBar.addEventListener('keyup', (e) => {
+    const searchString = e.target.value.toLowerCase();
+    filteredGames = myLibrary.filter((myLibrary) => {
+        return (myLibrary.title.toLowerCase().includes(searchString) || 
+                myLibrary.platform.toLowerCase().includes(searchString) || 
+                myLibrary.owned.toLowerCase().includes(searchString) || 
+                myLibrary.completed.toLowerCase().includes(searchString)
+                )})
+                // console.log(filteredGames);
+    gameLoopToScreen(filteredGames);
+});
 function changeReadStatus(event) {
     let selectElementParent = document.getElementById(event.target.id).parentElement.parentElement;
     let num = selectElementParent.children[0].id;
@@ -142,6 +156,12 @@ function openForm() {
     optionTwo.textContent = "Playstation 4"
     let optionThree = selectionContainer.appendChild(document.createElement('option'))
     optionThree.textContent = "Nintendo Switch"
+    let optionFour = selectionContainer.appendChild(document.createElement('option'))
+    optionFour.textContent = "Virtual Boy"
+    let optionFive = selectionContainer.appendChild(document.createElement('option'))
+    optionFive.textContent = "Super Nintendo"
+    let optionSix = selectionContainer.appendChild(document.createElement('option'))
+    optionSix.textContent = "Nintendo 64"
 
     optionOne;
     optionTwo;
@@ -247,4 +267,10 @@ addGameToLibrary(new game('BloodBourne', ' Playstation 4', ' Owned: Yes', ' yes 
 addGameToLibrary(new game('God Of War', ' Playstation 4', ' Owned: Yes', ' yes completed'));
 addGameToLibrary(new game('Ghost Of Tsushima', ' Playstation 4', ' Owned: Yes', ' not completed'));
 addGameToLibrary(new game('Crash Team Racing', ' Nintendo Switch', ' Owned: Yes', ' yes completed'));
-gameLoopToScreen();
+addGameToLibrary(new game('Galactic Pinball', ' Virtual Boy', ' Owned: Yes', ' not completed'));
+addGameToLibrary(new game('Teleroboxer', ' Virtual Boy', ' Owned: Yes', ' not completed'));
+addGameToLibrary(new game('Mario Tennis', ' Virtual Boy', ' Owned: Yes', ' not completed'));
+addGameToLibrary(new game('Mario Clash', ' Virtual Boy', ' Owned: Yes', ' not completed'));
+addGameToLibrary(new game('Super Mario 64', ' Nintendo 64', ' Owned: Yes', ' not completed'));
+addGameToLibrary(new game('Super Mario All Stars', ' Super Nintendo', ' Owned: Yes', ' not completed'));
+gameLoopToScreen(filteredGames);
