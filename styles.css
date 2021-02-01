@@ -84,16 +84,19 @@ li {
   left: 30%;
   width: 40%;
   height: 40%;
-  background-color: grey;
+  background-color: #4e4b5c;
+  border-color: #ef0000;
   border-radius: 2%;
+  border-style: ridge;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 5px 15px 5px 15px;
 }
 .inputStyle {
-  width: 85%;
-  height: 30px;
+  max-width: 350px;
+  width: 100%;
+  height: 3vh;
   align-self: center;
   padding: 0px 15px;
 }
@@ -111,6 +114,22 @@ li {
   -webkit-text-stroke-width: 1px;
   color: #ff0000;
 }
+.submitForm {
+  background: #101010;
+  border: none;
+  width: 70%;
+  align-self: center;
+  font-size: 3vh;
+  cursor: pointer;
+  -webkit-text-stroke-color: #000000;
+  -webkit-text-stroke-width: 1px;
+  color: #ef0000;
+}
+.submitForm:hover {
+  color: #ffffff;
+  -webkit-text-stroke-color: #ff0000;
+  -webkit-text-stroke-width: 1px;
+}
 .deleteButton:hover {
   color: #ffffff;
   -webkit-text-stroke-color: #ff0000;
@@ -119,7 +138,6 @@ li {
 .gameitle {
   padding: 15px 0px 0px 0px;
 }
-/* The switch - the box around the slider */
 .switch {
   position: relative;
   display: inline-block;
@@ -128,15 +146,11 @@ li {
   align-self: flex-end;
   justify-self: right;
 }
-
-/* Hide default HTML checkbox */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -149,7 +163,6 @@ li {
   transition: 0.4s;
   border-radius: 17px;
 }
-
 .slider:before {
   position: absolute;
   content: "";
@@ -162,15 +175,12 @@ li {
   transition: 0.4s;
   border-radius: 50%;
 }
-
 input:checked + .slider {
   background-color: #4e4b5c;
 }
-
 input:focus + .slider {
   box-shadow: 0 0 1px #4e4b5c;
 }
-
 input:checked + .slider:before {
   -webkit-transform: translateX(13px);
   -ms-transform: translateX(13px);

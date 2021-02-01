@@ -106,10 +106,12 @@ function openForm() {
     createDiv.setAttribute('class', 'deleteButton');
     createDiv.setAttribute('onclick', 'removeForm()');
     createDiv.setAttribute('type', 'reset');
+    createDiv.style.alignSelf = 'flex-end';
     createDiv.textContent = 'x';
 
     
     const QOne = SelectFormContainer.appendChild(document.createElement('div'));
+    QOne.style.fontSize =  '2vh';
     QOne.textContent = 'What is the games title?';
     
     const QOneInput = SelectFormContainer.appendChild(document.createElement('input'));
@@ -119,6 +121,7 @@ function openForm() {
     QOneInput.setAttribute('autocomplete', 'off');
 
     const QTwo = SelectFormContainer.appendChild(document.createElement('div'));
+    QTwo.style.fontSize =  '2vh';
     QTwo.textContent = 'Adding under what platform?';
     
     const QTwoInput = SelectFormContainer.appendChild(document.createElement('label'));
@@ -147,6 +150,7 @@ function openForm() {
     QTwoInputSelection();
     
     const QThree = SelectFormContainer.appendChild(document.createElement('div'));
+    QThree.style.fontSize =  '2vh';
     QThree.textContent = 'Do you own this game?';
     
     QThreeInput = SelectFormContainer.appendChild(document.createElement('label'));
@@ -172,6 +176,7 @@ function openForm() {
     QThreeInputSelection();
     
     const QFour = SelectFormContainer.appendChild(document.createElement('div'));
+    QFour.style.fontSize =  '2vh';
     QFour.textContent = 'Have you completed the game?';
    
     const QFourInput = SelectFormContainer.appendChild(document.createElement('label'));
@@ -197,7 +202,7 @@ function openForm() {
     QFourInputSelection();
     
     const submitButton = SelectFormContainer.appendChild(document.createElement('input'));
-    submitButton.setAttribute('class', 'inputStyle');
+    submitButton.setAttribute('class', 'inputStyle, submitForm');
     submitButton.setAttribute('type', 'submit');
     submitButton.setAttribute('value', 'Submit');
 
