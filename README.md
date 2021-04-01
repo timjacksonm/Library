@@ -47,7 +47,7 @@
 ## Summary
 
 I decided to unviel apart of my creative side and give this library a virtual boy nintendo theme. This project focused on refining skills I learned from prior lessons. Manipulating an array and display all my game objects to the screen as game cards. Giving the games a "completion" tag or "not completed". Displaying a form when a new game button is clicked. With the form I added an eventListener that took the data and populated the array.
-Creative break before diggin into harder projects to come. 
+This was a nice creative break before diggin into harder projects to come. 
 
 ## Author
 
