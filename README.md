@@ -16,7 +16,7 @@
   <a href="#license">License</a>
 </p>
 
-### ✨ [Live Preview](https://timjacksonm.github.io/Library)
+### ✨ [Live Demo](https://timjacksonm.github.io/Library)
 
 ## Screenshots
 
