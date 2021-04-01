@@ -5,7 +5,7 @@
   <image src="images/virtualboy.gif" width="50%"> 
 </h1>
 
-<h4 align="center">A game library inspired by virtual boy console. I used JavaScript, HTML, and CSS for this project.</h4>
+<h4 align="center">A game library inspired by the virtual boy console. I used JavaScript, HTML, and CSS for this project.</h4>
 
 <p align="center">
   <a href="#screenshots">Screenshots</a> •
