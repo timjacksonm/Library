@@ -1,8 +1,8 @@
-![GIF title image](images/virtualboy.gif)
 <h1 align="center">
   <br>
   Game Library
   <br>
+  <image src="images/virtualboy.gif" width="50%"> 
 </h1>
 
 <h4 align="center">A game library inspired by virtual boy console. I used JavaScript, HTML, and CSS for this project.</h4>
@@ -22,7 +22,7 @@
 
 <details>
   <summary>Show Image</summary>
-  Demonstrates multiple calculations 
+  
   ![GIF demo](images/librarydemo.gif)
 </details>
 
