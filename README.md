@@ -30,7 +30,7 @@
 
 - [✔️] Add a function that can take user's input and store a new book into an array.
 - [✔️] Write a function that loops through the array and displays each book on the page.
-- [✔️] Add a "New Book" button that brings up a form allowing users to input the details for the new book. ie autor, title, number of pages, whether it's been read or not.
+- [✔️] Add a "New Book" button that brings up a form allowing users to input the details for the new book. ie author, title, number of pages, whether it's been read or not.
 - [✔️] Add a button on each books display to remove the book from the library.
 - [✔️] Add a button on each books display to change its read status.
 
@@ -46,8 +46,8 @@
 
 ## Summary
 
-I decided to unviel apart of my creative side and give this library a virtual boy nintendo theme. This project focused on refining skills I learned from prior lessons. Manipulating an array and display all my game objects to the screen as game cards. Giving the games a "completion" tag or "not completed". Displaying a form when a new game button is clicked. With the form I added an eventListener that took the data and populated the array.
-This was a nice creative break before diggin into harder projects to come. 
+I decided to unveil apart of my creative side and give this library a Virtual Boy Nintendo theme. This project focused on refining skills I learned from prior lessons. Manipulating an array and display all my game objects to the screen as game cards. Giving the games a "completion" tag or "not completed". Displaying a form when a new game button is clicked. With the form I added an eventListener that took the data and populated the array.
+This was a nice creative break before digging into harder projects to come. 
 
 ## Author
 
